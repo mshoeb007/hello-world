@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: dating-container
-        image: shoebweb007/dating:7
+        image: {{dockerImage}}
         ports:
         - containerPort: 8080
       imagePullSecrets:

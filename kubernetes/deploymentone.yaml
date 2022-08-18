@@ -1,1 +1,26 @@
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dating-deployment
+spec:
+  selector:
+    matchLabels:
+      app: dating-app
+  replicas: 3 # tells deployment to run 3 pods matching the template
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: dating-app
+    spec:
+      containers:
+      - name: dating-container
+        image: {{dockerImage}}
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+      - name: regcred
